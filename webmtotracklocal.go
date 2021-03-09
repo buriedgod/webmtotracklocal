@@ -1,6 +1,7 @@
 package webmtotracklocal
 
 import (
+	"errors"
 	"fmt"
 	"math"
 	"os"
@@ -99,10 +100,10 @@ func (t *WebMProducer) VideoCodec() string {
 // AddTrack will add new track to pc
 func (t *WebMProducer) AddTrack(pc *webrtc.PeerConnection, kind string) (*webrtc.TrackLocalStaticSample, error) {
 	if pc == nil {
-		return nil, errInvalidPC
+		return nil, errors.New("invalid PC")
 	}
 	if kind != "video" && kind != "audio" {
-		return nil, errInvalidKind
+		return nil, errors.New("invalid kind")
 	}
 
 	var track *webrtc.TrackLocalStaticSample
